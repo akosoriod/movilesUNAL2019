@@ -3,16 +3,18 @@ package com.example.triqui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button[][] buttons = new Button[3][3];
+    private String Board[] = {"button_00","button_01","button_02","button_10","button_11","button_12","button_20","button_21","button_22"};
 
     private boolean player1Turn = true;
 
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private TextView textViewPlayer1;
     private TextView textViewandroid;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+               resetBoard();
             }
         });
     }
@@ -57,12 +60,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
-        if (player1Turn) {
-            ((Button) v).setText("X");
-            Button next = findViewById(R.id.button_20);
-            next.setText("O");
-        }
 
+
+        ((Button) v).setText("X");
         roundCount++;
 
         if (checkForWin()) {
@@ -77,8 +77,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             player1Turn = !player1Turn;
         }
 
-    }
+        if (roundCount < 8) {
+            getMove();
+            if (checkForWin()) {
+                if (player1Turn) {
+                    player1Wins();
+                } else {
+                    androidWins();
+                }
+            }
 
+        }
+
+
+
+    }
+    private void getMove() {
+        String btn = new String(Board[new Random().nextInt(9)]);
+        int resID = getResources().getIdentifier(btn, "id", getPackageName());
+        Button next = findViewById(resID);
+        if (next.getText().toString().equals("")) {
+            player1Turn = !player1Turn;
+            roundCount++;
+            next.setText("O");
+        }else{
+         getMove();
+        }
+    }
     private boolean checkForWin() {
         String[][] field = new String[3][3];
 
@@ -91,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for (int i = 0; i < 3; i++) {
             if (field[i][0].equals(field[i][1])
                     && field[i][0].equals(field[i][2])
-                    && !field[i][0].equals("")) {
+                    && !field[i][0].equals("") )  {
                 return true;
             }
         }
@@ -99,20 +124,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for (int i = 0; i < 3; i++) {
             if (field[0][i].equals(field[1][i])
                     && field[0][i].equals(field[2][i])
-                    && !field[0][i].equals("")) {
+                    && !field[0][i].equals("") )  {
                 return true;
             }
         }
 
         if (field[0][0].equals(field[1][1])
                 && field[0][0].equals(field[2][2])
-                && !field[0][0].equals("")) {
+                && !field[0][0].equals("") )  {
             return true;
         }
 
         if (field[0][2].equals(field[1][1])
                 && field[0][2].equals(field[2][0])
-                && !field[0][2].equals("")) {
+                && !field[0][2].equals("") ) {
             return true;
         }
 
@@ -125,24 +150,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         player1Points++;
         Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_SHORT).show();
         updatePointsText();
-        resetBoard();
+       endBoard();
     }
 
     private void androidWins() {
         androidPoints++;
-        Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Android wins!", Toast.LENGTH_SHORT).show();
         updatePointsText();
-        resetBoard();
+       endBoard();
     }
 
     private void draw() {
         Toast.makeText(this, "Draw!", Toast.LENGTH_SHORT).show();
-        resetBoard();
+        endBoard();
     }
 
     private void updatePointsText() {
         textViewPlayer1.setText("Player 1: " + player1Points);
-        textViewandroid.setText("Player 2: " + androidPoints);
+        textViewandroid.setText("Andorid: " + androidPoints);
     }
 
     private void resetBoard() {
@@ -154,5 +179,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         roundCount = 0;
         player1Turn = true;
+    }
+    private void endBoard() {
+
+        for (int i = 0; i < 9; i++) {
+            String btn = new String(Board[i]);
+            int resID = getResources().getIdentifier(btn, "id", getPackageName());
+            Button next = findViewById(resID);
+            if (next.getText().toString().equals("")) {
+                next.setText("-");
+            }
+
+       }
+
     }
 }
