@@ -15,7 +15,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button[][] buttons = new Button[3][3];
     private String Board[] = {"button_00","button_01","button_02","button_10","button_11","button_12","button_20","button_21","button_22"};
-
+    private String diag1[] = {"button_00","button_11","button_22"};
+    private String diag2[] = {"button_02","button_10","button_11","button_20"};
     private boolean player1Turn = true;
 
     private int roundCount;
@@ -60,49 +61,72 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
-
-
         ((Button) v).setText("X");
         roundCount++;
 
+       if (roundCount == 9) {
+            draw();
+        }else{
         if (checkForWin()) {
             if (player1Turn) {
                 player1Wins();
             } else {
                 androidWins();
             }
-        } else if (roundCount == 9) {
-            draw();
-        } else {
             player1Turn = !player1Turn;
-        }
-
-        if (roundCount < 8) {
-            getMove();
+        }else{
+            if (roundCount < 9) {
+                getMove();}
             if (checkForWin()) {
                 if (player1Turn) {
                     player1Wins();
                 } else {
                     androidWins();
-                }
-            }
-
+                }}
+            player1Turn = !player1Turn;
         }
+       }
+
+
 
 
 
     }
     private void getMove() {
-        String btn = new String(Board[new Random().nextInt(9)]);
+
+        String btn = getnum();
         int resID = getResources().getIdentifier(btn, "id", getPackageName());
         Button next = findViewById(resID);
         if (next.getText().toString().equals("")) {
-            player1Turn = !player1Turn;
             roundCount++;
             next.setText("O");
         }else{
          getMove();
         }
+    }
+    private String getnum() {
+        String[][] field = new String[3][3];
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                field[i][j] = buttons[i][j].getText().toString();
+            }
+        }
+
+
+        if (field[0][0].equals(field[1][1])
+                || field[0][0].equals(field[2][2])
+                && field[0][0].equals("X") )  {
+            return new String(diag1[new Random().nextInt(3)]);
+        }
+
+        if (field[0][2].equals(field[1][1])
+                || field[0][2].equals(field[2][0])
+                && field[0][2].equals("X") ) {
+            return new String(diag2[new Random().nextInt(3)]);
+        }
+
+        return new String(Board[new Random().nextInt(9)]);
     }
     private boolean checkForWin() {
         String[][] field = new String[3][3];
@@ -148,32 +172,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void player1Wins() {
         player1Points++;
-        Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Player gana!", Toast.LENGTH_SHORT).show();
         updatePointsText();
-       endBoard();
+        endBoard();
     }
 
     private void androidWins() {
         androidPoints++;
-        Toast.makeText(this, "Android wins!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Android gana!", Toast.LENGTH_SHORT).show();
         updatePointsText();
-       endBoard();
+        endBoard();
     }
 
     private void draw() {
-        Toast.makeText(this, "Draw!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Empate!", Toast.LENGTH_SHORT).show();
         endBoard();
     }
 
     private void updatePointsText() {
         textViewPlayer1.setText("Player 1: " + player1Points);
-        textViewandroid.setText("Andorid: " + androidPoints);
+        textViewandroid.setText("Android: " + androidPoints);
     }
 
     private void resetBoard() {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 buttons[i][j].setText("");
+                buttons[i][j].setEnabled(true);
             }
         }
 
@@ -182,15 +207,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     private void endBoard() {
 
-        for (int i = 0; i < 9; i++) {
-            String btn = new String(Board[i]);
-            int resID = getResources().getIdentifier(btn, "id", getPackageName());
-            Button next = findViewById(resID);
-            if (next.getText().toString().equals("")) {
-                next.setText("-");
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                buttons[i][j].setEnabled(false);
             }
-
-       }
+        }
 
     }
 }
