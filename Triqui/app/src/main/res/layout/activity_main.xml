@@ -7,6 +7,7 @@
     android:gravity="center_horizontal"
     android:background="#FEFCAC">
 
+
     <TableLayout
         android:id="@+id/scoreGrid"
         android:layout_width="fill_parent"
@@ -113,6 +114,7 @@
         android:textSize="20dp"
         />
 
+
     <TableLayout
         android:id="@+id/menu_grid"
         android:layout_width="fill_parent"
@@ -121,29 +123,39 @@
         android:layout_marginTop="10dp" >
         <TableRow android:gravity="center_horizontal">
 
-        <Button
-            android:id="@+id/newgame_b"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="New Game"
-            android:textSize="10sp" />
+            <Button
+                android:id="@+id/newgame_b"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#2196F3"
+                android:text="New Game"
+                android:textSize="10sp" />
 
-        <Button
-            android:id="@+id/difficulty_b"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Difficulty"
-            android:textSize="10sp" />
-        <Button
-            android:id="@+id/quit_b"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Quit"
-            android:textSize="10sp" />
+            <Button
+                android:id="@+id/difficulty_b"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#2196F3"
+                android:text="Difficulty"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/about_b"
+                android:background="#2196F3"
+                android:text="About"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/quit_b"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#2196F3"
+                android:text="Quit"
+                android:textSize="10sp" />
 
         </TableRow>
     </TableLayout>
-    <TableLayout
+ <!--   <TableLayout
         android:id="@+id/menu_grid2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -156,13 +168,10 @@
                 android:layout_height="wrap_content"
                 android:text="Sound: on"
                 android:textSize="10sp" />
-            <Button
-                android:id="@+id/about_b"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="About"
-                android:textSize="10sp" />
+
         </TableRow>
     </TableLayout>
+-->
+
 
 </RelativeLayout>

@@ -94,7 +94,7 @@ public class MainActivity extends Activity  {
         mNewGameButton = (Button) findViewById(R.id.newgame_b);
         mDifficultyButton = (Button) findViewById(R.id.difficulty_b);
         mQuitButton = (Button) findViewById(R.id.quit_b);
-        mSoundButton = (Button) findViewById(R.id.sound_b);
+       // mSoundButton = (Button) findViewById(R.id.sound_b);
 
         mAbout = (Button) findViewById(R.id.about_b);
 
@@ -123,7 +123,7 @@ public class MainActivity extends Activity  {
         mNewGameButton.setOnClickListener(new ButtonNewGame());
         mDifficultyButton.setOnClickListener(new ButtonDifficulty());
         mQuitButton.setOnClickListener(new ButtonQuit());
-        mSoundButton.setOnClickListener(new ButtonSound());
+       // mSoundButton.setOnClickListener(new ButtonSound());
         mAbout.setOnClickListener(new ButtonAbout());
 /*
         // Reset all buttons
@@ -321,15 +321,17 @@ public class MainActivity extends Activity  {
         startNewGame();
         return true;
     }*/
+// create an action bar button
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //Log.i("hola","Entro");
         super.onCreateOptionsMenu(menu);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.options_menu, menu);
         return true;
     }
+
+
 
     private class ButtonDifficulty implements View.OnClickListener{
         public void onClick(View view){
