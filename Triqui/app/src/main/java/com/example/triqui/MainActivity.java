@@ -309,7 +309,7 @@ public class MainActivity extends Activity  {
         setMove(winner,b);
         setMove(winner,c);
     }
-    /*
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -320,8 +320,8 @@ public class MainActivity extends Activity  {
     public boolean onOptionsItemSelected(MenuItem item) {
         startNewGame();
         return true;
-    }
-    */
+    }*/
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //Log.i("hola","Entro");
@@ -445,8 +445,8 @@ public class MainActivity extends Activity  {
     @Override
     protected void onResume() {
         super.onResume();
-        mHumanMediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.pew_pew);
-        mComputerMediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.fire_bow);
+        mHumanMediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.player);
+        mComputerMediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.robot);
 
         mTieMediaPlayer = MediaPlayer.create(getApplicationContext(),R.raw.tie);
         mWinMediaPlayer = MediaPlayer.create(getApplicationContext(),R.raw.win);

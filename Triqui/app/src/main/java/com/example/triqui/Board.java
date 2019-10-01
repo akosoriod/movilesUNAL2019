@@ -37,12 +37,13 @@ public class Board extends View {
     }
 
     public void initialize() {
-        mHumanBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.human);
+        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+        mHumanBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.player);
         mComputerBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.android);
-        mHumanBitmapWin = BitmapFactory.decodeResource(getResources(), R.drawable.human_win);
+        mHumanBitmapWin = BitmapFactory.decodeResource(getResources(), R.drawable.player_win);
         mComputerBitmapWin = BitmapFactory.decodeResource(getResources(), R.drawable.android_win);
 
-        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     }
 
     @Override
