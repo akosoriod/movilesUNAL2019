@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">SqliteApp</string>
+    <string-array name="types">
+        <item>Escoger una clasificación ...</item>
+        <item>Consultoría</item>
+        <item>Desarrollo a la medida</item>
+        <item>Fábrica de software.</item>
+        <item>Desarrollo a la medida y fábrica de software.</item>
+    </string-array>
+
+</resources>
