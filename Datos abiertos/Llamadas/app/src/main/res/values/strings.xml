@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Señal Movil Operadores</string>
+    <string name="title_home">Inicio</string>
+    <string name="title_dashboard">Ciudades</string>
+    <string name="title_notifications">Operadores</string>
+    <string name="linkDS">Medición de Calidad de Servicios de voz y datos Móviles\n\n\nCiencia, Tecnología E Innovación\n\n\n\nResultados de la Medición de Calidad para el servicio de voz y datos a través de redes móviles.</string>
+</resources>
